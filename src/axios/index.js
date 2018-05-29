@@ -5,8 +5,8 @@ import axios from 'axios';
 import { get } from './tools';
 import * as config from './config';
 
-var siteBase = 'http://localhost:8080';
-// var siteBase = '';
+// var siteBase = 'http://localhost:8080';
+var siteBase = '';
 export const getPros = () => axios.get(siteBase + '/api/news.do', {
 
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
