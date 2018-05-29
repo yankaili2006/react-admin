@@ -5,7 +5,9 @@ import axios from 'axios';
 import { get } from './tools';
 import * as config from './config';
 
-export const getPros = () => axios.get('/api/news.do', {
+var siteBase = 'http://localhost:8080';
+// var siteBase = '';
+export const getPros = () => axios.get(siteBase + '/api/news.do', {
 
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
@@ -21,7 +23,7 @@ export const getPros = () => axios.get('/api/news.do', {
 });
 
 // ask bid
-export const getProsAsk = () => axios.get('/api/depth.do', {
+export const getProsAsk = () => axios.get(siteBase + '/api/depth.do', {
 
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
@@ -38,7 +40,7 @@ export const getProsAsk = () => axios.get('/api/depth.do', {
 
 // trade
 
-export const getProsTrade = () => axios.get('/api/trade.do', {
+export const getProsTrade = () => axios.get(siteBase + '/api/trade.do', {
 
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
