@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 // import { Router, Route, hashHistory, IndexRedirect } from 'react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import BasicForm from '../components/forms/BasicForm';
-import BasicTable from '../components/tables/BasicTables';
+import BasicTable from '../components/tables/BasicTableMarket';
 import AdvancedTable from '../components/tables/AdvancedTables';
 import AsynchronousTable from '../components/tables/AsynchronousTable';
 import Echarts from '../components/charts/Echarts';
