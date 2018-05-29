@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/16.
  */
 import axios from 'axios';
-import { get } from './tools';
+import {get} from './tools';
 import * as config from './config';
 
 // var siteBase = 'http://localhost:8080';
@@ -23,8 +23,8 @@ export const getPros = () => axios.get(siteBase + '/api/news.do', {
 });
 
 // ask bid
-export const getProsAsk = () => axios.get(siteBase + '/api/depth.do', {
-
+export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
+    symbol: symbol,
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
     //     period: "day",
@@ -32,7 +32,8 @@ export const getProsAsk = () => axios.get(siteBase + '/api/depth.do', {
     //     offset: 0,
     //     limit: 30
 }).then(function (response) {
-    // console.log("response:", response);
+
+    console.log("response:", response, "symbol", symbol);
     return response.data;
 }).catch(function (error) {
     console.log(error);
@@ -40,8 +41,9 @@ export const getProsAsk = () => axios.get(siteBase + '/api/depth.do', {
 
 // trade
 
-export const getProsTrade = () => axios.get(siteBase + '/api/trade.do', {
+export const getProsTrade = (symbol) => axios.get(siteBase + '/api/trade.do', {
 
+    symbol: symbol,
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
     //     period: "day",
@@ -49,7 +51,7 @@ export const getProsTrade = () => axios.get(siteBase + '/api/trade.do', {
     //     offset: 0,
     //     limit: 30
 }).then(function (response) {
-    // console.log("response:", response);
+    console.log("response:", response, "symbol", symbol);
     return response.data;
 }).catch(function (error) {
     console.log(error);
@@ -61,8 +63,14 @@ export const weibo = () => axios.get('./weibo.json').then(res => res.data).catch
 
 const GIT_OAUTH = 'https://github.com/login/oauth';
 export const gitOauthLogin = () => axios.get(`${GIT_OAUTH}/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`);
-export const gitOauthToken = code => axios.post('https://cors-anywhere.herokuapp.com/' + GIT_OAUTH + '/access_token', {...{client_id: '792cdcd244e98dcd2dee',
-    client_secret: '81c4ff9df390d482b7c8b214a55cf24bf1f53059', redirect_uri: 'http://localhost:3006/', state: 'reactAdmin'}, code: code}, {headers: {Accept: 'application/json'}})
+export const gitOauthToken = code => axios.post('https://cors-anywhere.herokuapp.com/' + GIT_OAUTH + '/access_token', {
+    ...{
+        client_id: '792cdcd244e98dcd2dee',
+        client_secret: '81c4ff9df390d482b7c8b214a55cf24bf1f53059',
+        redirect_uri: 'http://localhost:3006/',
+        state: 'reactAdmin'
+    }, code: code
+}, {headers: {Accept: 'application/json'}})
     .then(res => res.data).catch(err => console.log(err));
 export const gitOauthInfo = access_token => axios({
     method: 'get',

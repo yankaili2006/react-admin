@@ -5,20 +5,6 @@ import React from 'react';
 import {Table} from 'antd';
 import { getProsAsk } from '../../axios';
 
-const columns = [{
-    title: '价格(usdt)',
-    dataIndex: 'price',
-    key: 'price'
-}, {
-    title: '数量(btc)',
-    dataIndex: 'quantity',
-    key: 'quantity',
-}, {
-    title: '金额(usdt)',
-    dataIndex: 'amount',
-    key: 'amount',
-}];
-
 // const data = [{
 //     key: '1',
 //     price: 7256.46,
@@ -38,18 +24,23 @@ const columns = [{
 
 export default class BasicTableBid extends React.Component {
     state = {
+        symbol: 'btc/usdt',
+        columns: [],
         data: []
     };
 
     componentDidMount() {
 
-        this.start();
+        // this.props.onRef(this);
+
+        this.start(this.state.symbol);
         this.timer = setInterval(
             () => {
-                this.start();
+                this.start(this.state.symbol);
             },
             2000
         );
+
     }
 
     //
@@ -57,17 +48,72 @@ export default class BasicTableBid extends React.Component {
         clearInterval(this.timer);
     }
 
-    start = () => {
-        this.setState({ });
-        getProsAsk().then(res => {
-            this.setState({
-                data: [...res.content[0].bids.map(item=>{
-                    return {
-                        price: item[0],
-                        quantity: item[1],
-                        amount: item[0]*item[1]
-                    }
-                })
+    setSymbol = (symbol) => {
+        this.setState({
+            symbol: symbol});
+        this.start(symbol);
+    };
+
+    start = (symbol) => {
+
+        // this.setState({ });
+
+        getProsAsk(symbol).then(res => {
+
+            var ind = 1;
+            var depth = 0;
+
+            var symbolt = symbol.split('/')[0];
+            var symbolb = symbol.split('/')[1];
+
+            this.setState(
+                {
+                    symbol: symbol,
+                    columns: [
+                        {
+                            title: '序号',
+                            dataIndex: 'idx',
+                            key: 'idx',
+                            align: 'right',
+                        },
+                        {
+                            title: '价格(' + symbolb + ')',
+                            dataIndex: 'price',
+                            key: 'price',
+                            align: 'right',
+                        },
+                        {
+                            title: '数量(' + symbolt + ')',
+                            dataIndex: 'quantity',
+                            key: 'quantity',
+                            align: 'right',
+                        },
+                        {
+                            title: '金额(' + symbolb + ')',
+                            dataIndex: 'amount',
+                            key: 'amount',
+                            align: 'right',
+                        },
+                        {
+                            title: '深度(' + symbolb + ')',
+                            dataIndex: 'depth',
+                            key: 'depth',
+                            align: 'right',
+                        }
+                    ],
+                    data: [...res.content[0].bids.map(
+                        item =>
+                        {
+                            depth = depth + item[0]*item[1];
+                            return {
+                                idx: ind++,
+                                price: item[0].toFixed(2),
+                                quantity: item[1].toFixed(8),
+                                amount: (item[0]*item[1]).toFixed(8),
+                                depth: depth.toFixed(8)
+                            }
+                        }
+                    )
                 ]
             });
             // console.log("getProsAsk")
@@ -76,7 +122,7 @@ export default class BasicTableBid extends React.Component {
 
     render() {
         return (
-            <Table columns={columns} dataSource={this.state.data} />
+            <Table columns={this.state.columns} dataSource={this.state.data} />
         );
     }
 }

@@ -6,23 +6,38 @@ import { Table, Row, Col, Card } from 'antd';
 import { getPros } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 
-const columns = [{
-    title: 'Id',
-    dataIndex: 'newsId',
-    width: 5
-}, {
-    title: '时间',
-    dataIndex: 'time',
-    width: 5
-}, {
-    title: '标题',
-    dataIndex: 'title',
-    width: 200
-}, {
-    title: '内容',
-    dataIndex: 'content',
-    width: 400
-}];
+const columns = [
+    {
+        title: '序号',
+        dataIndex: 'idx',
+        key: 'idx',
+        width: 5,
+    },
+    {
+        title: '时间',
+        dataIndex: 'time',
+        key: 'time',
+        width: 5,
+    },
+    {
+        title: '来源',
+        dataIndex: 'src',
+        key: 'src',
+        width: 5,
+    },
+    {
+        title: '标题',
+        dataIndex: 'title',
+        key: 'title',
+        width: 200,
+    },
+    {
+        title: '内容',
+        dataIndex: 'content',
+        key: 'content',
+        width: 400,
+    }
+    ];
 
 class AsynchronousTable extends React.Component {
     state = {
@@ -47,12 +62,19 @@ class AsynchronousTable extends React.Component {
 
     start = () => {
         this.setState({ });
-        getPros().then(res => {
-            this.setState({
-                data: [...res.content.map(val => {
-                    val.key = val.time;
-                    return val;
-                })]
+        getPros().then(
+            res => {
+                var idx = 1;
+            this.setState(
+                {
+                data: [...res.content.map(
+                        val => {
+                            val.key = val.time;
+                            val.idx = idx++;
+                            return val;
+                        }
+                    )
+                ]
             });
         });
     };
