@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/15.
  */
 import React from 'react';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Button } from 'antd';
 import BasicTableBid from './BasicTableBid';
 import BasicTableAsk from './BasicTableAsk';
 import BasicTableTrade from './BasicTableTrade';
@@ -10,83 +10,183 @@ import BreadcrumbCustom from '../BreadcrumbCustom';
 
 const symbols = [
     {
-        symbol:'btc/usdt',
+        symbol:'btc_usdt',
         symbolt:'btc',
         symbolb:'usdt',
     },
     {
-        symbol:'eth/usdt',
-        symbolt:'eth',
-        symbolb:'usdt',
-    },
-    {
-        symbol:'xrp/usdt',
-        symbolt:'xrp',
-        symbolb:'usdt',
-    },
-    {
-        symbol:'bch/usdt',
+        symbol:'bch_usdt',
         symbolt:'bch',
         symbolb:'usdt',
     },
     {
-        symbol:'eos/usdt',
-        symbolt:'eos',
+        symbol:'eth_usdt',
+        symbolt:'eth',
         symbolb:'usdt',
     },
     {
-        symbol:'ltc/usdt',
+        symbol:'etc_usdt',
+        symbolt:'etc',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'ltc_usdt',
         symbolt:'ltc',
         symbolb:'usdt',
     },
     {
-        symbol:'ada/usdt',
+        symbol:'eos_usdt',
+        symbolt:'eos',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'xrp_usdt',
+        symbolt:'xrp',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'omg_usdt',
+        symbolt:'omg',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'dash_usdt',
+        symbolt:'dash',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'zec_usdt',
+        symbolt:'zec',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'iota_usdt',
+        symbolt:'iota',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'ada_usdt',
         symbolt:'ada',
         symbolb:'usdt',
     },
     {
-        symbol:'xlm/usdt',
-        symbolt:'xlm',
+        symbol:'steem_usdt',
+        symbolt:'steem',
         symbolb:'usdt',
     },
     {
-        symbol:'trx/usdt',
-        symbolt:'trx',
+        symbol:'ctxc_usdt',
+        symbolt:'ctxc',
         symbolb:'usdt',
     },
     {
-        symbol:'miota/usdt',
-        symbolt:'miota',
+        symbol:'act_usdt',
+        symbolt:'act',
         symbolb:'usdt',
     },
     {
-        symbol:'neo/usdt',
-        symbolt:'neo',
+        symbol:'btm_usdt',
+        symbolt:'btm',
         symbolb:'usdt',
-    }
+    },
+    {
+        symbol:'bts_usdt',
+        symbolt:'bts',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'ont_usdt',
+        symbolt:'ont',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'iost_usdt',
+        symbolt:'iost',
+        symbolb:'usdt',
+    },
+    {
+        symbol:'ht_usdt',
+        symbolt:'ht',
+        symbolb:'usdt',
+    },
+
+    // {
+    //     symbol:'btc_usdt',
+    //     symbolt:'btc',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'eth_usdt',
+    //     symbolt:'eth',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'xrp_usdt',
+    //     symbolt:'xrp',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'bch_usdt',
+    //     symbolt:'bch',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'eos_usdt',
+    //     symbolt:'eos',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'ltc_usdt',
+    //     symbolt:'ltc',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'ada_usdt',
+    //     symbolt:'ada',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'xlm_usdt',
+    //     symbolt:'xlm',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'trx_usdt',
+    //     symbolt:'trx',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'miota_usdt',
+    //     symbolt:'miota',
+    //     symbolb:'usdt',
+    // },
+    // {
+    //     symbol:'neo_usdt',
+    //     symbolt:'neo',
+    //     symbolb:'usdt',
+    // }
 ];
 
 export default class BasicTableMarket extends React.Component {
 
     clickHandler = (text, e) =>{
-        // console.log("text", text);
-        this.refs.tableAsk.start(text)
-        this.refs.tableBid.start(text)
-        this.refs.tableTrade.start(text)
+        console.log("text", text);
+        this.refs.tableAsk.setSymbol(text)
+        this.refs.tableBid.setSymbol(text)
+        this.refs.tableTrade.setSymbol(text)
     };
 
     render() {
 
-        // let boundClick = this.clickHandler.bind(this, 'btc/usdt');
-
         return (
-            <div className="gutter-example">
+            <div className="gutter-example button-demo">
                 <BreadcrumbCustom first="行情" />
+
                 {
                     symbols.map(
                         symbol => {
                             return (
-                                <button onClick={this.clickHandler.bind(this, symbol.symbol)} >{symbol.symbol}</button>
+                                <Button onClick={this.clickHandler.bind(this, symbol.symbol)} >{symbol.symbol}</Button>
                             );
                         }
                     )
@@ -123,6 +223,13 @@ export default class BasicTableMarket extends React.Component {
 
 
                 </Row>
+
+                <style>{`
+                    .button-demo .ant-btn {
+                        margin-right: 8px;
+                        margin-bottom: 12px;
+                    }
+                `}</style>
             </div>
         );
     }

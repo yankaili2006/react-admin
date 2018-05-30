@@ -24,9 +24,9 @@ import { getProsAsk } from '../../axios';
 // }];
 
 
-export default class BasicTableAsk extends React.Component {
+export default class wBasicTableAsk extends React.Component {
     state = {
-        symbol: 'btc/usdt',
+        symbol: 'btc_usdt',
         columns: [],
         data: []
     };
@@ -59,15 +59,15 @@ export default class BasicTableAsk extends React.Component {
 
         // this.setState({ });
 
-        console.log("symbol:", symbol);
+        // console.log("symbol:", symbol);
 
         getProsAsk(symbol).then(res => {
 
             var ind = 1;
             var depth = 0;
 
-            var symbolt = symbol.split('/')[0];
-            var symbolb = symbol.split('/')[1];
+            var symbolt = symbol.split('_')[0];
+            var symbolb = symbol.split('_')[1];
             this.setState({
 
                     symbol: symbol,

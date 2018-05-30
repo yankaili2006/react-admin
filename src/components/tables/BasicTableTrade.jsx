@@ -51,7 +51,7 @@ Date.prototype.format = function (fmt) {
 
 export default class BasicTableTrade extends React.Component {
     state = {
-        symbol: 'btc/usdt',
+        symbol: 'btc_usdt',
         columns: [],
         data: []
     };
@@ -85,7 +85,7 @@ export default class BasicTableTrade extends React.Component {
 
         getProsTrade(symbol).then(res => {
 
-            const tradeElements = [] // 保存每个用户渲染以后 JSX 的数组
+            const tradeElements = []; // 保存每个用户渲染以后 JSX 的数组
 
             var idx = 1;
             var tradeSum = 0;
@@ -107,8 +107,8 @@ export default class BasicTableTrade extends React.Component {
             }
 
 
-            var symbolt = symbol.split('/')[0];
-            var symbolb = symbol.split('/')[1];
+            var symbolt = symbol.split('_')[0];
+            var symbolb = symbol.split('_')[1];
 
             this.setState({
                 symbol: symbol,

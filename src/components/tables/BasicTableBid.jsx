@@ -24,7 +24,7 @@ import { getProsAsk } from '../../axios';
 
 export default class BasicTableBid extends React.Component {
     state = {
-        symbol: 'btc/usdt',
+        symbol: 'btc_usdt',
         columns: [],
         data: []
     };
@@ -57,14 +57,15 @@ export default class BasicTableBid extends React.Component {
     start = (symbol) => {
 
         // this.setState({ });
+        // console.log("start", symbol);
 
         getProsAsk(symbol).then(res => {
 
             var ind = 1;
             var depth = 0;
 
-            var symbolt = symbol.split('/')[0];
-            var symbolb = symbol.split('/')[1];
+            var symbolt = symbol.split('_')[0];
+            var symbolb = symbol.split('_')[1];
 
             this.setState(
                 {

@@ -24,7 +24,9 @@ export const getPros = () => axios.get(siteBase + '/api/news.do', {
 
 // ask bid
 export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
-    symbol: symbol,
+    params: {
+        symbol: symbol
+    }
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
     //     period: "day",
@@ -33,7 +35,7 @@ export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
     //     limit: 30
 }).then(function (response) {
 
-    console.log("response:", response, "symbol", symbol);
+    // console.log("depth response: symbol", symbol);
     return response.data;
 }).catch(function (error) {
     console.log(error);
@@ -42,8 +44,9 @@ export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
 // trade
 
 export const getProsTrade = (symbol) => axios.get(siteBase + '/api/trade.do', {
-
-    symbol: symbol,
+    params: {
+        symbol: symbol
+    }
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
     //     category: "trending",
     //     period: "day",
@@ -51,7 +54,7 @@ export const getProsTrade = (symbol) => axios.get(siteBase + '/api/trade.do', {
     //     offset: 0,
     //     limit: 30
 }).then(function (response) {
-    console.log("response:", response, "symbol", symbol);
+    // console.log("trade response symbol", symbol);
     return response.data;
 }).catch(function (error) {
     console.log(error);
