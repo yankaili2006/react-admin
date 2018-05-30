@@ -1,7 +1,7 @@
 export const menus = [
     { key: '/app/table/basicTable', title: '深度交易', icon: '', },
     // { key: '/app/table/advancedTable', title: '高级表格', icon: '', },
-    { key: '/app/table/asynchronousTable', title: '快讯', icon: '', },
+    { key: '/app/table/asynchronousTable', title: '热点', icon: '', },
 
 
     // { key: '/app/dashboard/index', title: '首页', icon: 'mobile', },

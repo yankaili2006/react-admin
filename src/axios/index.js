@@ -25,6 +25,7 @@ export const getPros = () => axios.get(siteBase + '/api/news.do', {
 // ask bid
 export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
     params: {
+        platform: 'huobi',
         symbol: symbol
     }
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
@@ -45,6 +46,7 @@ export const getProsAsk = (symbol) => axios.get(siteBase + '/api/depth.do', {
 
 export const getProsTrade = (symbol) => axios.get(siteBase + '/api/trade.do', {
     params: {
+        platform: 'huobi',
         symbol: symbol
     }
     // export const getPros = () => axios.post('http://api.xitu.io/resources/github', {
